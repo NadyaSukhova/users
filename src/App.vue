@@ -44,7 +44,7 @@ a {
 body {
   background-image: url("./assets/cat_background.png"), linear-gradient(
     to bottom right,
-    rgb(63, 57, 98),
+    rgb(63, 57, 99),
     rgb(231, 114, 255)
   );
   background-size:auto, cover;
