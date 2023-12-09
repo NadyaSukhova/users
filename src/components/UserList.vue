@@ -15,7 +15,7 @@ const usersStore = useUsersStore();
       :key="index"
     >
       <router-link
-        @click="this.user_id = Number(user.id)"
+        @click="user_id = Number(user.id)"
         :to="{ name: 'user_page', params: { id: user.id } }"
       >
         <form class="user_card" onclick=" window.scrollTo(0, 0);">
