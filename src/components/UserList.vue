@@ -54,8 +54,8 @@ export default {
   name: "UserList",
   data() {
     return {
-      usersObj: useUsersStore(),
       user_id: -1,
+      usersObj: useUsersStore()
     };
   },
   beforeMount() {
