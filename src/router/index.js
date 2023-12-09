@@ -8,7 +8,7 @@ const routes = [
     component: UserList,
   },
   {
-    path: "/user/:id",
+    path: "/users/user/:id",
     name: "user_page",
     props: true,
     component: UserPage,
