@@ -20,20 +20,22 @@ const usersStore = useUsersStore();
       >
         <form class="user_card" onclick=" window.scrollTo(0, 0);">
           <img
-            style="height: 12vh; border-radius: 50%; border-color: white"
+            id="cat_img"
+            style="border-radius: 50%; border-color: white"
             border="10vh"
             src="../assets/cat.png"
           />
-          <div class="info" style="padding-top: 5vh; text-align: left; text-decoration: none;">
-            <div
-              style="font-size: 1.5vw; margin-bottom: 3vh;margin-top: 3vh; font-weight: bold"
-            >
+          <div
+            class="info"
+            style="padding-top: 5vh; text-align: left; text-decoration: none"
+          >
+            <div id="main_info">
               Name: {{ user.name }} <br />
               Username: {{ user.username }} <br />
               Email: {{ user.email }} <br />
             </div>
-              Phone: {{ user.phone }} <br />
-              Website: {{ user.website }} <br />
+            Phone: {{ user.phone }} <br />
+            Website: {{ user.website }} <br />
             кнопка и кнопка
           </div>
         </form>
@@ -55,7 +57,7 @@ export default {
   data() {
     return {
       user_id: -1,
-      usersObj: useUsersStore()
+      usersObj: useUsersStore(),
     };
   },
   beforeMount() {
@@ -70,6 +72,10 @@ export default {
   filter: grayscale(80%);
   position: relative;
   z-index: 5;
+}
+
+#cat_img {
+  height: 12vh;
 }
 
 .user_card img {
@@ -108,7 +114,7 @@ export default {
 
 #vibris_rigth1,
 #vibris_rigth2,
-#vibris_rigth3{
+#vibris_rigth3 {
   transform: rotate(-10deg);
   left: 50%;
 }
@@ -164,5 +170,99 @@ export default {
 .user_card:hover ~ #vibris_rigth3 {
   transform: rotate(5deg);
   left: 56.5%;
+}
+
+@media only screen and (max-width: 768px) {
+  #cat_img {
+    height: 11vh;
+  }
+  .user_card {
+    filter: none;
+  }
+  #vibris_rigth1,
+  #vibris_rigth2,
+  #vibris_rigth3,
+  #vibris_left1,
+  #vibris_left2,
+  #vibris_left3 {
+    display: none;
+  }
+
+  #ears {
+    width: 77%;
+    left: 11.5%;
+    filter: none;
+    margin-top: -59.7vh;
+  }
+  .user_card:hover ~ #ears {
+    margin-top: -59.7vh;
+  }
+}
+
+@media only screen and (min-width: 430px) and (max-width: 768px) {
+
+  #vibris_rigth1,
+  #vibris_rigth2,
+  #vibris_rigth3,
+  #vibris_left1,
+  #vibris_left2,
+  #vibris_left3 {
+
+    transform: rotate(0);
+    display: block;
+
+  }
+
+  #ears {
+    margin-top: -70vw;
+    width: 50%;
+    left: 25%;
+  }
+
+  #vibris_left1, .user_card:hover ~ #vibris_left1  {
+    transform: rotate(0);
+    left: 1%;
+  }
+  #vibris_left2, .user_card:hover ~ #vibris_left2 {
+    left: 2.5%;
+    rotate: (15deg);
+  }
+  #vibris_left3, .user_card:hover ~ #vibris_left3 {
+    left: 4%;
+    rotate: (35deg);
+  }
+
+  #vibris_rigth1, .user_card:hover ~ #vibris_rigth1 {
+    left: 85%;
+  }
+  #vibris_rigth2, .user_card:hover ~ #vibris_rigth2 {
+    left: 84.5%;
+    rotate: (-15deg);
+  }
+  #vibris_rigth3, .user_card:hover ~ #vibris_rigth3 {
+    left: 84%;
+    rotate: (-35deg);
+  }
+
+  #vibris_left1,
+#vibris_rigth1 {
+  width: 15%;
+  margin-top: -48%;
+}
+#vibris_left2,
+#vibris_rigth2 {
+  width: 14%;
+  margin-top: -46.5%;
+}
+#vibris_left3,
+#vibris_rigth3 {
+  width: 12%;
+  margin-top: -45%;
+}
+
+
+  .user_card:hover ~ #ears {
+    margin-top: -70vw;
+  }
 }
 </style>
