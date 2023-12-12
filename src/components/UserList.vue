@@ -82,7 +82,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .buttons {
-  margin-top: 1vh;
+  position: absolute;
+  bottom: 0.5vh;
   display: flex;
   flex-wrap: nowrap;
   align-content: center;

@@ -29,7 +29,7 @@ a {
 .user_card {
   background: linear-gradient(rgb(255, 171, 198) 25%, white 25%);
   color: midnightblue;
-  height: 54vh;
+  height: 60vh;
   border-radius: 30px;
   padding-top: 8vh;
   text-align: center;
