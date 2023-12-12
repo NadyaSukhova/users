@@ -5,11 +5,7 @@ import { useUsersStore } from "./stores/users";
 <template>
   <HeaderComp />
   <form class="user_card" style="filter: none">
-    <img
-      style="height: 20vh; border-color: white"
-      border="10vh"
-      src="../assets/cat.png"
-    />
+    <img border="10vh" src="../assets/cat.png" />
     <br />
     <div style="text-align: left; padding-bottom: 3vh">
       <div class="main_info">
@@ -17,13 +13,13 @@ import { useUsersStore } from "./stores/users";
         Username: {{ item.username }} <br />
         Email: {{ item.email }} <br />
       </div>
-      <div style="margin-left: 2vw; margin-right:2vw; ">
+      <div style="margin-left: 2vw; margin-right: 2vw">
         Phone: {{ item.phone }} <br />
         Website: {{ item.website }} <br />
         <hr class="paws" />
         <br />
       </div>
-      <div style="font-size: 4vh; text-align: center">Posts:</div>
+      <div class="part_name">Posts:</div>
       <div class="posts" v-for="(post, index) in postId" :key="index">
         <div style="padding-left: 2vw">
           {{ post.id }}. «{{ post.title.toUpperCase() }}»
@@ -34,6 +30,7 @@ import { useUsersStore } from "./stores/users";
       </div>
     </div>
   </form>
+  <br />
 </template>
 
 <script>
@@ -55,7 +52,7 @@ export default {
       item: null,
       albumId: [],
       postId: [],
-      photos: []
+      photos: [],
     };
   },
   beforeMount() {
@@ -83,6 +80,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.part_name {
+  font-size: 4vh;
+  text-align: center;
+}
+
+img {
+  height: 20vh;
+  border-color: white;
+}
+
 .user_card {
   margin-top: 3vh;
   padding-top: 6vh;
@@ -125,5 +132,55 @@ hr:after {
   padding: 0 4px;
   position: relative;
   top: -13px;
+}
+
+@media only screen and (max-width: 768px) {
+  .main_info {
+    font-size: 5vw;
+  }
+  img {
+    height: 20vw;
+  }
+  .user_card {
+    font-size: 4vw;
+  }
+  hr:after {
+    content: "";
+    padding: 0;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .part_name {
+    font-size: 5vw;
+    font-weight: bold;
+  }
+  .album_name {
+    font-size: 4vw;
+    text-align: center;
+  }
+  .post_body {
+    font-size: 3.5vw;
+  }
+}
+
+@media only screen and (min-width: 430px) and (max-width: 768px) {
+  .pic {
+    width: 40vw;
+    height: 40vw;
+  }
+  .carousel {
+    width: 60vw;
+  }
+  .slide {
+    width: 60vw;
+  }
+  .all_characters {
+    text-align: center;
+  }
+  hr:after {
+    content: url("../assets/icons8-paw-64.png");
+    padding: 0 4px;
+  }
 }
 </style>

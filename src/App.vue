@@ -62,7 +62,7 @@ body {
   .user_card {
     width: 80%;
     font-size: 3vw;
-    height: 43vh;
+    height: 50vh;
   }
   #main_info {
     font-size: 4vw;

@@ -187,24 +187,24 @@ export default {
 #vibris_left1,
 #vibris_rigth1 {
   width: 15%;
-  margin-top: -22%;
+  margin-top: -50vh;
   transition-duration: 0.5s;
 }
 #vibris_left2,
 #vibris_rigth2 {
   width: 14%;
-  margin-top: -20.7%;
+  margin-top: -48vh;
   transition-duration: 0.7s;
 }
 #vibris_left3,
 #vibris_rigth3 {
   width: 12%;
-  margin-top: -19.5%;
+  margin-top: -46vh;
   transition-duration: 1s;
 }
 
 .user_card:hover ~ #ears {
-  margin-top: -72vh;
+  margin-top: -78vh;
   filter: none;
 }
 
@@ -255,14 +255,25 @@ export default {
   }
 
   #ears {
-    width: 77%;
-    left: 11.5%;
+    width: 76vw;
+    left: 12vw;
     filter: none;
-    margin-top: -59.7vh;
+    margin-top: -69vh;
   }
   .user_card:hover ~ #ears {
     margin-top: -59.7vh;
   }
+
+  .posts, .photos {
+    width: 20vw;
+    margin-left: 10vw;
+  }
+
+  .buttons {
+  width: 100vw;
+  justify-content:flex-start;
+  bottom: -1vw;
+}
 }
 
 @media only screen and (min-width: 430px) and (max-width: 768px) {
@@ -277,7 +288,7 @@ export default {
   }
 
   #ears {
-    margin-top: -70vw;
+    margin-top: -68vw;
     width: 50%;
     left: 25%;
   }
@@ -316,20 +327,43 @@ export default {
   #vibris_left1,
   #vibris_rigth1 {
     width: 15%;
-    margin-top: -48%;
+    margin-top: -47vw;
   }
   #vibris_left2,
   #vibris_rigth2 {
     width: 14%;
-    margin-top: -46.5%;
+    margin-top: -45.5vw;
   }
   #vibris_left3,
   #vibris_rigth3 {
     width: 12%;
-    margin-top: -45%;
+    margin-top: -44vw;
   }
   .user_card:hover ~ #ears {
     margin-top: -70vw;
+  }
+}
+
+@media only screen and (min-width: 430px) and (max-width: 768px) {
+  .buttons {
+  width: fit-content;
+  justify-content:flex-end;
+}
+
+.user_card:hover ~ #ears {
+    margin-top: -68vw;
+  }
+
+.posts, .photos {
+  margin-left: 2vw;
+  width: 30vw;
+  padding: 2vw;
+}
+}
+
+@media only screen and (max-width: 430px) {
+  .user_card {
+    height: 50vh;
   }
 }
 </style>

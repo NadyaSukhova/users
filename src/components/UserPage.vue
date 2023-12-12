@@ -17,12 +17,13 @@ import { useUsersStore } from "./stores/users";
         Username: {{ item.username }} <br />
         Email: {{ item.email }} <br />
       </div>
-      <div style="margin-left: 2vw; margin-right:2vw; ">
+      <div style="margin-left: 2vw; margin-right: 2vw">
         Phone: {{ item.phone }} <br />
         Website: {{ item.website }} <br />
         <hr class="paws" />
         <br />
       </div>
+
       <div style="font-size: 4vh; text-align: center">Albums:</div>
 
       <div
@@ -30,7 +31,34 @@ import { useUsersStore } from "./stores/users";
         v-for="(album, index) in albumId"
         :key="index"
       >
-        {{ album.id }} {{ album.title }} <br />
+        <div style="font-size: 3.5vh; margin-left: 2vw">
+          «{{ album.title.toUpperCase() }}»
+        </div>
+        <br />
+        <center>
+          <carousel :items-to-show="1" style="width: 30vw" :wrap-around="true">
+            <slide
+              v-for="(photo, index) in photos[album.id]"
+              :key="index"
+              style="width: 30vw"
+            >
+              <div
+                class="pic"
+                :style="{
+                  backgroundColor: '#' + photo.thumbnailUrl.substring(32),
+                }"
+              >
+                {{ photo.thumbnailUrl.substring(32) }}
+              </div>
+            </slide>
+
+            <template #addons>
+              <navigation />
+              <pagination />
+            </template>
+          </carousel>
+        </center>
+        <br />
       </div>
       <br />
       <div style="font-size: 4vh; text-align: center">Posts:</div>
@@ -49,11 +77,17 @@ import { useUsersStore } from "./stores/users";
 <script>
 import HeaderComp from "./HeaderComp.vue";
 import axios from "axios";
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
 export default {
   name: "UserPage.vue",
   components: {
     HeaderComp,
+    Carousel,
+    Slide,
+    Pagination,
+    Navigation,
   },
   props: {
     id: String,
@@ -65,7 +99,7 @@ export default {
       item: null,
       albumId: [],
       postId: [],
-      photos: []
+      photos: [],
     };
   },
   beforeMount() {
@@ -83,12 +117,30 @@ export default {
               this.albumId,
               Number(this.$route.params.id)
             );
+            for (let album of this.albumId) {
+              try {
+                axios
+                  .get(
+                    "https://jsonplaceholder.typicode.com/photos?albumId=" +
+                      album.id
+                  )
+                  .then((response) => {
+                    this.photos[album.id] = response.data.slice(0, 5);
+                    this.usersObj.pushPhotos(this.photos[album.id], album.id);
+                  });
+              } catch (error) {
+                console.log(error);
+              }
+            }
           });
       } catch (error) {
         console.log(error);
       }
     } else {
-      this.albumId = this.usersObj.posts[Number(this.$route.params.id) - 1];
+      this.albumId = this.usersObj.albums[Number(this.$route.params.id) - 1];
+      for (let album of this.albumId) {
+        this.photos[album.id] = this.usersObj.photos[album.id];
+      }
     }
     if (!this.usersObj.posts[Number(this.$route.params.id) - 1]) {
       try {
@@ -113,6 +165,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.carousel__pagination {
+  padding: 0;
+}
+.pic {
+  width: 30vw;
+  height: 30vw;
+}
 .user_card {
   margin-top: 3vh;
   padding-top: 6vh;
