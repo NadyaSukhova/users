@@ -17,7 +17,7 @@ import { useUsersStore } from "./stores/users";
         Username: {{ item.username }} <br />
         Email: {{ item.email }} <br />
       </div>
-      <div style="margin-left: 2vw; margin-right:2vw; ">
+      <div style="margin-left: 2vw; margin-right: 2vw">
         Phone: {{ item.phone }} <br />
         Website: {{ item.website }} <br />
         <hr class="paws" />
@@ -30,18 +30,13 @@ import { useUsersStore } from "./stores/users";
         v-for="(album, index) in albumId"
         :key="index"
       >
+        <div style="font-size: 3.5vh">Albums:</div>
         {{ album.id }} {{ album.title }} <br />
+        <div v-for="(photo, index) in photos[album.id]" :key="index">
+            {{ photo }}
+        </div>
       </div>
       <br />
-      <div style="font-size: 4vh; text-align: center">Posts:</div>
-      <div class="posts" v-for="(post, index) in postId" :key="index">
-        <div style="padding-left: 2vw">
-          {{ post.id }}. «{{ post.title.toUpperCase() }}»
-        </div>
-        <br />
-        <div class="post_body">{{ post.body }}</div>
-        <br />
-      </div>
     </div>
   </form>
 </template>
@@ -51,7 +46,7 @@ import HeaderComp from "./HeaderComp.vue";
 import axios from "axios";
 
 export default {
-  name: "UserPage.vue",
+  name: "UserPagePhotos.vue",
   components: {
     HeaderComp,
   },
@@ -64,8 +59,7 @@ export default {
       usersObj: useUsersStore(),
       item: null,
       albumId: [],
-      postId: [],
-      photos: []
+      photos: [],
     };
   },
   beforeMount() {
@@ -88,24 +82,18 @@ export default {
         console.log(error);
       }
     } else {
-      this.albumId = this.usersObj.posts[Number(this.$route.params.id) - 1];
+      this.albumId = this.usersObj.albums[Number(this.$route.params.id) - 1];
     }
-    if (!this.usersObj.posts[Number(this.$route.params.id) - 1]) {
+    for (let album of this.albumId) {
       try {
         axios
           .get(
-            "https://jsonplaceholder.typicode.com/posts/?userId=" +
-              this.$route.params.id
+            "https://jsonplaceholder.typicode.com/photos?albumId=" + album.id
           )
-          .then((response) => {
-            this.postId = response.data;
-            this.usersObj.pushPosts(this.postId, Number(this.$route.params.id));
-          });
+          .then((response) => (this.photos[album.id] = response.data.slice(0, 5)));
       } catch (error) {
         console.log(error);
       }
-    } else {
-      this.postId = this.usersObj.posts[Number(this.$route.params.id) - 1];
     }
   },
 };

@@ -36,7 +36,20 @@ const usersStore = useUsersStore();
             </div>
             Phone: {{ user.phone }} <br />
             Website: {{ user.website }} <br />
-            кнопка и кнопка
+            <div class="buttons">
+              <router-link
+                @click="user_id = Number(user.id)"
+                :to="{ name: 'user_posts', params: { id: user.id } }"
+              >
+                <button class="posts">User's posts</button>
+              </router-link>
+              <router-link
+                @click="user_id = Number(user.id)"
+                :to="{ name: 'user_photos', params: { id: user.id } }"
+              >
+                <button class="photos">User's albums</button>
+              </router-link>
+            </div>
           </div>
         </form>
         <img id="ears" src="../assets/ears.png" />
@@ -68,6 +81,58 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.buttons {
+  margin-top: 1vh;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 23vw;
+}
+
+.posts, .photos {
+  background-color: #ffffff;
+  border: 0;
+  width: 11vw;
+  padding: 1vw;
+  font-family: Museo;
+  border-radius: 10px;
+  box-shadow: none;
+  background-color: rgb(255, 171, 198);
+}
+.posts:hover, .photos:hover{
+  animation-name: light;
+  animation-duration: 0.325s;
+}
+
+@keyframes light {
+  0% {
+    background-color: rgb(255, 171, 198);
+  }
+
+  15% {
+    background-image: linear-gradient(45deg, rgb(255, 171, 198) 80%,rgb(255, 195, 214) 90%);
+  }
+
+  40% {
+    background-image: linear-gradient(45deg, rgb(255, 171, 198) 40%,rgb(255, 195, 214) 50%, rgb(255, 171, 198) 60%,rgb(255, 207, 222) 90%);
+  }
+
+  60% {
+    background-image: linear-gradient(45deg, rgb(255, 195, 214) 10%, rgb(255, 171, 198) 15%, rgb(255, 171, 198) 20%,rgb(255, 207, 222) 50%, rgb(255, 171, 198) 80%);
+  }
+
+  80% {
+    background-image: linear-gradient(45deg, rgb(255, 207, 222) 10%, rgb(255, 171, 198) 40%);
+  }
+
+  100% {
+    background-color: rgb(255, 171, 198);
+  }
+}
+
+
 .user_card {
   filter: grayscale(80%);
   position: relative;
@@ -200,17 +265,14 @@ export default {
 }
 
 @media only screen and (min-width: 430px) and (max-width: 768px) {
-
   #vibris_rigth1,
   #vibris_rigth2,
   #vibris_rigth3,
   #vibris_left1,
   #vibris_left2,
   #vibris_left3 {
-
     transform: rotate(0);
     display: block;
-
   }
 
   #ears {
@@ -219,48 +281,52 @@ export default {
     left: 25%;
   }
 
-  #vibris_left1, .user_card:hover ~ #vibris_left1  {
+  #vibris_left1,
+  .user_card:hover ~ #vibris_left1 {
     transform: rotate(0);
     left: 1%;
   }
-  #vibris_left2, .user_card:hover ~ #vibris_left2 {
+  #vibris_left2,
+  .user_card:hover ~ #vibris_left2 {
     left: 2.5%;
     rotate: (15deg);
   }
-  #vibris_left3, .user_card:hover ~ #vibris_left3 {
+  #vibris_left3,
+  .user_card:hover ~ #vibris_left3 {
     left: 4%;
     rotate: (35deg);
   }
 
-  #vibris_rigth1, .user_card:hover ~ #vibris_rigth1 {
+  #vibris_rigth1,
+  .user_card:hover ~ #vibris_rigth1 {
     left: 85%;
   }
-  #vibris_rigth2, .user_card:hover ~ #vibris_rigth2 {
+  #vibris_rigth2,
+  .user_card:hover ~ #vibris_rigth2 {
     left: 84.5%;
     rotate: (-15deg);
   }
-  #vibris_rigth3, .user_card:hover ~ #vibris_rigth3 {
+  #vibris_rigth3,
+  .user_card:hover ~ #vibris_rigth3 {
     left: 84%;
     rotate: (-35deg);
   }
 
   #vibris_left1,
-#vibris_rigth1 {
-  width: 15%;
-  margin-top: -48%;
-}
-#vibris_left2,
-#vibris_rigth2 {
-  width: 14%;
-  margin-top: -46.5%;
-}
-#vibris_left3,
-#vibris_rigth3 {
-  width: 12%;
-  margin-top: -45%;
-}
-
-
+  #vibris_rigth1 {
+    width: 15%;
+    margin-top: -48%;
+  }
+  #vibris_left2,
+  #vibris_rigth2 {
+    width: 14%;
+    margin-top: -46.5%;
+  }
+  #vibris_left3,
+  #vibris_rigth3 {
+    width: 12%;
+    margin-top: -45%;
+  }
   .user_card:hover ~ #ears {
     margin-top: -70vw;
   }

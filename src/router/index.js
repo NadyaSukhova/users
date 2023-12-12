@@ -1,6 +1,7 @@
 import { createRouter } from "vue-router";
 import UserList from "../components/UserList.vue";
-import UserPage from "../components/UserPage.vue";
+import UserPagePosts from "../components/UserPagePosts.vue";
+import UserPagePhotos from "../components/UserPagePhotos.vue";
 const routes = [
   {
     path: '/users/',
@@ -8,10 +9,22 @@ const routes = [
     component: UserList,
   },
   {
+    path: "/users/user_posts/:id",
+    name: "user_posts",
+    props: true,
+    component: UserPagePosts,
+  },
+  {
+    path: "/users/user_photos/:id",
+    name: "user_photos",
+    props: true,
+    component: UserPagePhotos,
+  },
+  {
     path: "/users/user/:id",
     name: "user_page",
     props: true,
-    component: UserPage,
+    component: UserPagePhotos,
   },
 ];
 export default function (history) {

@@ -7,7 +7,6 @@ export const useUsersStore = defineStore({
     users: [],
     posts: [],
     albums: [],
-    photos: [],
   }),
   persist: true,
   actions: {
@@ -22,27 +21,11 @@ export const useUsersStore = defineStore({
         console.log(error);
       }
     },
-    getPosts() {
-      try {
-        axios
-          .get("https://jsonplaceholder.typicode.com/posts")
-          .then((response) => (this.posts = response.data));
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    getPhotos() {
-      try {
-        axios
-          .get("https://jsonplaceholder.typicode.com/photos")
-          .then((response) => (this.photos = response.data));
-      } catch (error) {
-        console.log(error);
-      }
+    pushPosts(posts_ids, id) {
+      this.posts[id - 1] = posts_ids;
     },
     pushAlbums(album_ids, id) {
       this.albums[id - 1] = album_ids;
-      console.log(this.albums)
     },
   },
 });

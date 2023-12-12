@@ -23,16 +23,6 @@ import { useUsersStore } from "./stores/users";
         <hr class="paws" />
         <br />
       </div>
-      <div style="font-size: 4vh; text-align: center">Albums:</div>
-
-      <div
-        class="all_characters"
-        v-for="(album, index) in albumId"
-        :key="index"
-      >
-        {{ album.id }} {{ album.title }} <br />
-      </div>
-      <br />
       <div style="font-size: 4vh; text-align: center">Posts:</div>
       <div class="posts" v-for="(post, index) in postId" :key="index">
         <div style="padding-left: 2vw">
@@ -51,7 +41,7 @@ import HeaderComp from "./HeaderComp.vue";
 import axios from "axios";
 
 export default {
-  name: "UserPage.vue",
+  name: "UserPagePosts.vue",
   components: {
     HeaderComp,
   },

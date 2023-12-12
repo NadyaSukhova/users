@@ -23,7 +23,7 @@ a {
 .info {
   position: absolute;
   bottom: 4vh;
-  margin-left: 5%;
+  margin-left: 1vw;
   top: 15vh;
 }
 .user_card {
