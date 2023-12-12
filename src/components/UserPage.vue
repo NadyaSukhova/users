@@ -5,11 +5,7 @@ import { useUsersStore } from "./stores/users";
 <template>
   <HeaderComp />
   <form class="user_card" style="filter: none">
-    <img
-      style="height: 20vh; border-color: white"
-      border="10vh"
-      src="../assets/cat.png"
-    />
+    <img border="10vh" src="../assets/cat.png" />
     <br />
     <div style="text-align: left; padding-bottom: 3vh">
       <div class="main_info">
@@ -23,25 +19,18 @@ import { useUsersStore } from "./stores/users";
         <hr class="paws" />
         <br />
       </div>
-
-      <div style="font-size: 4vh; text-align: center">Albums:</div>
+      <div class="part_name">Albums:</div>
 
       <div
         class="all_characters"
         v-for="(album, index) in albumId"
         :key="index"
       >
-        <div style="font-size: 3.5vh; margin-left: 2vw">
-          «{{ album.title.toUpperCase() }}»
-        </div>
+        <div class="album_name">«{{ album.title.toUpperCase() }}»</div>
         <br />
         <center>
-          <carousel :items-to-show="1" style="width: 30vw" :wrap-around="true">
-            <slide
-              v-for="(photo, index) in photos[album.id]"
-              :key="index"
-              style="width: 30vw"
-            >
+          <carousel :items-to-show="1" :wrap-around="true">
+            <slide v-for="(photo, index) in photos[album.id]" :key="index">
               <div
                 class="pic"
                 :style="{
@@ -61,7 +50,7 @@ import { useUsersStore } from "./stores/users";
         <br />
       </div>
       <br />
-      <div style="font-size: 4vh; text-align: center">Posts:</div>
+      <div class="part_name">Posts:</div>
       <div class="posts" v-for="(post, index) in postId" :key="index">
         <div style="padding-left: 2vw">
           {{ post.id }}. «{{ post.title.toUpperCase() }}»
@@ -72,6 +61,7 @@ import { useUsersStore } from "./stores/users";
       </div>
     </div>
   </form>
+  <br />
 </template>
 
 <script>
@@ -164,7 +154,40 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.post_body {
+  opacity: 0.9;
+  text-align: right;
+  margin: 0;
+  font-size: 3vh;
+  background-color: rgba(137, 43, 226, 0.101);
+  background-size: cover 100%;
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+  padding-right: 3vw;
+  padding-left: 2vw;
+}
+.album_name {
+  font-size: 3.5vh;
+  margin-left: 2vw;
+}
+.part_name {
+  font-size: 4vh;
+  text-align: center;
+}
+
+img {
+  height: 20vh;
+  border-color: white;
+}
+.carousel {
+  width: 30vw;
+}
+.slide {
+  width: 30vw;
+}
 .carousel__pagination {
   padding: 0;
 }
@@ -179,19 +202,6 @@ export default {
   width: 80%;
   background: white;
   font-size: 3.5vh;
-}
-
-.post_body {
-  opacity: 0.9;
-  text-align: right;
-  margin: 0;
-  font-size: 3vh;
-  background-color: rgba(137, 43, 226, 0.101);
-  background-size: cover 100%;
-  padding-top: 1vh;
-  padding-bottom: 2vh;
-  padding-right: 3vw;
-  padding-left: 2vw;
 }
 .main_info {
   font-size: 4vh;
@@ -214,5 +224,66 @@ hr:after {
   padding: 0 4px;
   position: relative;
   top: -13px;
+}
+
+@media only screen and (max-width: 768px) {
+  .main_info {
+    font-size: 5vw;
+  }
+  img {
+    height: 20vw;
+  }
+  .user_card {
+    font-size: 4vw;
+  }
+  hr:after {
+    content: "";
+    padding: 0;
+  }
+
+  .pic {
+  width: 35vw;
+  height: 35vw;
+}
+  .carousel {
+    width: 70vw;
+  }
+  .slide {
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .part_name {
+    font-size: 5vw;
+    font-weight: bold;
+  }
+  .album_name {
+    font-size: 4vw;
+    text-align: center;
+  }
+  .post_body {
+    font-size: 3.5vw;
+  }
+}
+
+@media only screen and (min-width: 430px) and (max-width: 768px) {
+  .pic {
+    width: 40vw;
+    height: 40vw;
+  }
+  .carousel {
+    width: 60vw;
+  }
+  .slide {
+    width: 60vw;
+  }
+  .all_characters {
+    text-align: center;
+  }
+  hr:after {
+    content: url("../assets/icons8-paw-64.png");
+    padding: 0 4px;
+  }
 }
 </style>

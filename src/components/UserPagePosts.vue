@@ -155,26 +155,12 @@ hr:after {
     font-size: 5vw;
     font-weight: bold;
   }
-  .album_name {
-    font-size: 4vw;
-    text-align: center;
-  }
   .post_body {
     font-size: 3.5vw;
   }
 }
 
 @media only screen and (min-width: 430px) and (max-width: 768px) {
-  .pic {
-    width: 40vw;
-    height: 40vw;
-  }
-  .carousel {
-    width: 60vw;
-  }
-  .slide {
-    width: 60vw;
-  }
   .all_characters {
     text-align: center;
   }
