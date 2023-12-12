@@ -200,6 +200,17 @@ hr:after {
     content: "";
     padding: 0;
   }
+
+  .pic {
+  width: 35vw;
+  height: 35vw;
+}
+  .carousel {
+    width: 70vw;
+  }
+  .slide {
+    width: 70vw;
+  }
 }
 
 @media only screen and (max-width: 430px) {
