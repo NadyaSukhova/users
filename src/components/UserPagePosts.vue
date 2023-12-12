@@ -60,26 +60,6 @@ export default {
   },
   beforeMount() {
     this.item = this.usersObj.users[Number(this.$route.params.id) - 1];
-    if (!this.usersObj.albums[Number(this.$route.params.id) - 1]) {
-      try {
-        axios
-          .get(
-            "https://jsonplaceholder.typicode.com/albums/?userId=" +
-              this.$route.params.id
-          )
-          .then((response) => {
-            this.albumId = response.data;
-            this.usersObj.pushAlbums(
-              this.albumId,
-              Number(this.$route.params.id)
-            );
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      this.albumId = this.usersObj.posts[Number(this.$route.params.id) - 1];
-    }
     if (!this.usersObj.posts[Number(this.$route.params.id) - 1]) {
       try {
         axios

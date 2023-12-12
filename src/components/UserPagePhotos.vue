@@ -30,11 +30,15 @@ import { useUsersStore } from "./stores/users";
         v-for="(album, index) in albumId"
         :key="index"
       >
-        <div style="font-size: 3.5vh">Albums:</div>
-        {{ album.id }} {{ album.title }} <br />
-        <div v-for="(photo, index) in photos[album.id]" :key="index">
-            {{ photo }}
+        <div style="font-size: 3.5vh; margin-left: 2vw">
+          «{{ album.title.toUpperCase() }}»
         </div>
+        <br />
+        <div v-for="(photo, index) in photos[album.id]" :key="index">
+          {{ photo.thumbnailUrl }} <br>
+          <img :src="photo.thumbnailUrl" :alt="photo.title" />
+        </div>
+        <br />
       </div>
       <br />
     </div>
@@ -77,22 +81,29 @@ export default {
               this.albumId,
               Number(this.$route.params.id)
             );
+            for (let album of this.albumId) {
+              try {
+                axios
+                  .get(
+                    "https://jsonplaceholder.typicode.com/photos?albumId=" +
+                      album.id
+                  )
+                  .then((response) => {
+                    this.photos[album.id] = response.data.slice(0, 5);
+                    this.usersObj.pushPhotos(this.photos[album.id], album.id);
+                  });
+              } catch (error) {
+                console.log(error);
+              }
+            }
           });
       } catch (error) {
         console.log(error);
       }
     } else {
       this.albumId = this.usersObj.albums[Number(this.$route.params.id) - 1];
-    }
-    for (let album of this.albumId) {
-      try {
-        axios
-          .get(
-            "https://jsonplaceholder.typicode.com/photos?albumId=" + album.id
-          )
-          .then((response) => (this.photos[album.id] = response.data.slice(0, 5)));
-      } catch (error) {
-        console.log(error);
+      for (let album of this.albumId) {
+        this.photos[album.id] = this.usersObj.photos[album.id];
       }
     }
   },

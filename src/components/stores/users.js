@@ -7,6 +7,7 @@ export const useUsersStore = defineStore({
     users: [],
     posts: [],
     albums: [],
+    photos: []
   }),
   persist: true,
   actions: {
@@ -26,6 +27,9 @@ export const useUsersStore = defineStore({
     },
     pushAlbums(album_ids, id) {
       this.albums[id - 1] = album_ids;
+    },
+    pushPhotos(photos_url, id) {
+      this.photos[id] = photos_url;
     },
   },
 });
